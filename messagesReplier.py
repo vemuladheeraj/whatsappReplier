@@ -25,9 +25,15 @@ DIALOGFLOW_PROJECT_ID = 'dheeraj-chatbot'
 SESSION_ID = 'current-user-id'
 session = session_client.session_path(DIALOGFLOW_PROJECT_ID, SESSION_ID)
 
-driver=webdriver.Chrome(executable_path="D:\Selenium Learning\chromedriver_win32 (2)\chromedriver.exe")
+
+options = webdriver.ChromeOptions()
+options.add_argument(r"user-data-dir=C:\Users\vemul\PycharmProjects\whatsappReplier\Debug Files")
+#options.binary_location="C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+
+driver=webdriver.Chrome(executable_path="D:\Selenium Learning\chromedriver_win32 (2)\chromedriver.exe", options=options)
 driver.get("https://web.whatsapp.com/")
 driver.fullscreen_window()
+
 mycontacts={'Sister'}
 wait=WebDriverWait(driver,5000)
 wait.until(EC.element_to_be_clickable((By.ID,"side")))
@@ -73,6 +79,7 @@ while(True):
                             responseForMessage)
                         driver.find_element_by_xpath("//*[@id='main']/footer/div[1]/div[2]/div/div[2]").send_keys(
                             Keys.ENTER)
+
 
 
 
