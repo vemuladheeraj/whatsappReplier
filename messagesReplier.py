@@ -28,7 +28,7 @@ session = session_client.session_path(DIALOGFLOW_PROJECT_ID, SESSION_ID)
 driver=webdriver.Chrome(executable_path="D:\Selenium Learning\chromedriver_win32 (2)\chromedriver.exe")
 driver.get("https://web.whatsapp.com/")
 driver.fullscreen_window()
-mycontacts={'Tricep Tarun'}
+mycontacts={'Sister'}
 wait=WebDriverWait(driver,5000)
 wait.until(EC.element_to_be_clickable((By.ID,"side")))
 SystemLastDefaultMessage="DefaultMessage"
@@ -37,7 +37,7 @@ while(True):
      #unreadFirstMessage=unreadMessages[0]
      #if(unreadFirstMessage.text!=""):
          #countOfUnreadMessage = int(unreadMessages[0].text) #if(countOfUnreadMessage>=0):
-     if(0==0):
+     if(True):#will implement the validation logic later
         for contact in mycontacts:
             driver.find_element_by_xpath("//*[@id='side']/div[1]/div/label/div/div[2]").clear()
             driver.find_element_by_xpath("//*[@id='side']/div[1]/div/label/div/div[2]").send_keys(contact)
