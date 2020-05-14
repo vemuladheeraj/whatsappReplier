@@ -1,34 +1,33 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+import datetime
+import json
 import time
-from selenium.webdriver.common.keys import Keys
+
 import dialogflow
 from google.api_core.exceptions import InvalidArgument
-import json
 from google.oauth2 import service_account
-
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 dialogflow_key = json.load(open("C:\\Users\\vemul\\Downloads\\Dheeraj-ChatBot-2752b0e57277.json"))
 credentials = (service_account.Credentials.from_service_account_info(dialogflow_key))
 session_client = dialogflow.SessionsClient(credentials=credentials)
 
-
-#DIALOGFLOW_PROJECT_ID = 'dheeraj-chatbot'
-#DIALOGFLOW_LANGUAGE_CODE = 'en-US'
-#GOOGLE_APPLICATION_CREDENTIALS = 'Dheeraj-ChatBot-2752b0e57277'
-#SESSION_ID = 'current-user-id'
+# DIALOGFLOW_PROJECT_ID = 'dheeraj-chatbot'
+# DIALOGFLOW_LANGUAGE_CODE = 'en-US'
+# GOOGLE_APPLICATION_CREDENTIALS = 'Dheeraj-ChatBot-2752b0e57277'
+# SESSION_ID = 'current-user-id'
 
 DIALOGFLOW_LANGUAGE_CODE = 'en-US'
 DIALOGFLOW_PROJECT_ID = 'dheeraj-chatbot'
 SESSION_ID = 'current-user-id'
 session = session_client.session_path(DIALOGFLOW_PROJECT_ID, SESSION_ID)
 
-
 options = webdriver.ChromeOptions()
 options.add_argument(r"user-data-dir=C:\Users\vemul\PycharmProjects\whatsappReplier\Debug Files")
-#options.binary_location="C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+# options.binary_location="C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
 
 driver=webdriver.Chrome(executable_path="D:\Selenium Learning\chromedriver_win32 (2)\chromedriver.exe", options=options)
 driver.get("https://web.whatsapp.com/")
@@ -61,6 +60,7 @@ while(True):
             lastMessageSentwithTime = allSentMessages[countOfInMessages - 1].text
             lastMessageSent = lastMessageSentwithTime.split("\n")[0]
             lastMessageSentTime = lastMessageSentwithTime.split("\n")[1]
+            currentDT = datetime.datetime.now()
             if(lastMessageReceived!=SystemLastDefaultMessage):
                 SystemLastDefaultMessage=lastMessageReceived
                 if (lastMessageReceivedTime.split(" ")[1] == lastMessageSentTime.split(" ")[1]):
@@ -79,18 +79,19 @@ while(True):
                             responseForMessage)
                         driver.find_element_by_xpath("//*[@id='main']/footer/div[1]/div[2]/div/div[2]").send_keys(
                             Keys.ENTER)
+                    # elif(lastMessageReceivedTime.split(" ")[1] =="PM" & lastMessageSentTime.split(" ")[1]=="AM"):  #PM =6.45 pm , am = 9.50 am
+                else:
+                    driver.find_element_by_xpath(
+                        "//*[contains(@class,'message-out focusable-list-item')][last()]/div/div/div/div[2]/div/div/span").click()
+                    time.sleep(2)
+                    driver.find_element_by_xpath("//*[@id='app']/div/span[4]/div/ul/li[1]/div").click()
+                    time.sleep(2)
+                    deliveredDate_Self = driver.find_element_by_xpath(
+                        "//*[@id='app']/div/div/div[2]/div[3]/span/div/span/div/div[2]/div/div/div[2]/div/div[2]/div").Text
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    current_median = currentDT.strftime("%p")  # pm
+                    current_date = currentDT.strftime("%I:%M:%S %p")  # 04:13:59 PM
+                    if (current_median == "PM"):
+                        if (currentDT.strftime("%I%M") < lastMessageReceivedTime.split(" ")[1]):
+                            I_Need_Give_Reply = "One method"
+                            # I need to give reply currentDT.strftime("%I:%M:%S %p"))
