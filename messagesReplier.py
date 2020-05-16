@@ -29,7 +29,7 @@ for name in mycontacts:
 wait = WebDriverWait(driver, 5000)
 wait.until(EC.element_to_be_clickable((By.ID, "side")))
 SystemLastDefaultMessage = "DefaultMessage"
-
+global session_client, DIALOGFLOW_LANGUAGE_CODE, session
 
 def add_seconds(tm, secs):
     fulldate = datetime.datetime(100, 1, 1, tm.hour, tm.minute, tm.second)
