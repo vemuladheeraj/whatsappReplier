@@ -9,27 +9,30 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
+from constants import all_path_url
 from dialog_flow_credentials import dialog_flow_details
 
 dialog_flow_context = dialog_flow_details()
+path_url = all_path_url()
 
 options = webdriver.ChromeOptions()
-options.add_argument(r"user-data-dir=C:\Users\vemul\PycharmProjects\whatsappReplier\Debug Files")
-# options.binary_location="C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+options.add_argument(path_url.user_directory)
+# options.binary_location=path_url.binary_location
 # options.add_argument("--headless")
 
-driver = webdriver.Chrome(executable_path="D:\Selenium Learning\chromedriver_win32 (2)\chromedriver.exe",
+driver = webdriver.Chrome(executable_path=path_url.chrome_executable_path,
                           options=options)
-driver.get("https://web.whatsapp.com/")
+driver.get(path_url.url)
 driver.fullscreen_window()
 last_message_User = {}
-mycontacts = ['Sister']
-for name in mycontacts:
+my_contacts = path_url.contacts_to_send_message
+for name in my_contacts:
     last_message_User[name] = ""
 wait = WebDriverWait(driver, 5000)
 wait.until(EC.element_to_be_clickable((By.ID, "side")))
 SystemLastDefaultMessage = "DefaultMessage"
 global session_client, DIALOGFLOW_LANGUAGE_CODE, session
+
 
 def add_seconds(tm, secs):
     fulldate = datetime.datetime(100, 1, 1, tm.hour, tm.minute, tm.second)
@@ -37,7 +40,7 @@ def add_seconds(tm, secs):
     return fulldate.time()
 
 
-for contact in mycontacts:
+for contact in my_contacts:
     driver.find_element_by_xpath("//*[@id='side']/div[1]/div/label/div/div[2]").clear()
     driver.find_element_by_xpath("//*[@id='side']/div[1]/div/label/div/div[2]").send_keys(contact)
     time.sleep(1)
