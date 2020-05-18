@@ -60,18 +60,30 @@ while True:
                 driver.find_element_by_xpath(
                     "//*[contains(@class,'message-in focusable-list-item')][last()]").text.split(
                     "\n")[0]
+            try:
+                driver.find_element_by_xpath(
+                    "//*[contains(@class,'message-in focusable-list-item')][last()]/div/div/div/div/div[2]")
+                current_last_message_received = driver.find_element_by_xpath(
+                    "//*[contains(@class,'message-in focusable-list-item')][last()]/div/div/div/div/div[2]").text
+            except Exception:
+                print(Exception)
             if current_last_message_received != last_message_User.get(contact):
                 text_to_be_analyzed = current_last_message_received
-                last_message_User[contact] = current_last_message_received
-                text_input = dialogflow.types.TextInput(text=text_to_be_analyzed,
-                                                        language_code=dialog_flow_context.DIALOGFLOW_LANGUAGE_CODE)
-                query_input = dialogflow.types.QueryInput(text=text_input)
-                try:
-                    response = dialog_flow_context.session_client.detect_intent(session=dialog_flow_context.session,
-                                                                                query_input=query_input)
-                except InvalidArgument:
-                    raise
-                responseForMessage = response.query_result.fulfillment_text
+                if current_last_message_received == "":
+                    responseForMessage = ":)"
+                    last_message_User[contact] = current_last_message_received
+                else:
+                    last_message_User[contact] = current_last_message_received
+                    text_input = dialogflow.types.TextInput(text=text_to_be_analyzed,
+                                                            language_code=dialog_flow_context.DIALOGFLOW_LANGUAGE_CODE)
+                    query_input = dialogflow.types.QueryInput(text=text_input)
+                    try:
+                        response = dialog_flow_context.session_client.detect_intent(session=dialog_flow_context.session,
+                                                                                    query_input=query_input)
+                    except InvalidArgument:
+                        raise
+                    responseForMessage = response.query_result.fulfillment_text
+
                 driver.find_element_by_xpath("//*[@id='main']/footer/div[1]/div[2]/div/div[2]").send_keys(
                     responseForMessage)
                 driver.find_element_by_xpath("//*[@id='main']/footer/div[1]/div[2]/div/div[2]").send_keys(
