@@ -1,5 +1,5 @@
 # whatsappReplier
-This app is intended to reply to the person without human interderance. User needs to update the contact name in the script inorder to only reply them.
+This app is intended to reply to the person without human interference. User needs to update the contact name in the script inorder to only reply them.
 <br/>
 Below is the process to setup the application.
 1. Clone the project.
@@ -29,4 +29,44 @@ Below is the process to setup the application.
   </table>
 <br> Now the application is ready to launch, but with no support of dialog flow. In order to have the integration with dialogflow, please follow the below process.
 
+1.	Login to Dialogflow (https://dialogflow.com/)and click on Go to console.
+2.	Click on Create new agent
+!(C:\Users\vemul\OneDrive\Desktop\2.png)
+ 
+
+3.	Provide the agent name and select ‘create new google project’ under the google project field and click on create.
+
+
+ 
+
+4.	Click on the wrench icon beside the agent name to navigate to the setting menu.
+5.	Click on refresh icon in the service account field.
+6.	Note down the Project Id( This needs to be updated in the code.)
+ 
+7.	Click on the service account link, this will navigate to service accounts in Google Cloud Platform.
+
+ 
+
+8.	Select Create Service Account option.
+9.	Update the Name and description and click on create.
+10.	You can leave the optional details as blank in the next page.
+
+ 
+
+
+11.	The created account will be added in the same service accounts page.
+12.	Click on the three dots at the end of the service account details.
+13.	Select Create Key.
+ 
+14.	Select JSON and click on create, a new json file will be downloaded. Save the JSON(The path of the JSON needs to be updated in the code.)
+
+ 
+
+15.	Open dialog_flow_credentials.py file and update the path of the JSON in dailogflow_key variable.
+16.	Update the project ID in the DIALOGFLOW_PROJECT_ID variable and leave the session id as is.
+17.	Open constants.py file and update the chromedriver path in chrome_executable_path variable.
+18.	Chrome driver can be downloaded from https://sites.google.com/a/chromium.org/chromedriver/  (Note: Chrome driver is not the chrome application in fact  ChromeDriver is a standalone server that implements the W3C WebDriver standard.).
+19.	Update the contact name in contacts_to_send_message variable inorder to auto respond by the virtual agent.
+You are ready to run the application.
+Cheers!
 
