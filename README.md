@@ -42,7 +42,6 @@ Below is the process to setup the application.
 4.	Click on the wrench icon beside the agent name to navigate to the setting menu.
 5.	Click on refresh icon in the service account field.
 6.	Note down the Project Id( This needs to be updated in the code.)
- </br>![alt tag](https://github.com/vemuladheeraj/whatsappReplier/blob/master/ReadMeImages/3.png)
 7.	Click on the service account link, this will navigate to service accounts in Google Cloud Platform.
 
  </br>![alt tag](https://github.com/vemuladheeraj/whatsappReplier/blob/master/ReadMeImages/4.png)
