@@ -29,7 +29,7 @@ Below is the process to setup the application.
   </table>
 <br> Now the application is ready to launch, but with no support of dialog flow. In order to have the integration with dialogflow, please follow the below process.
 
-1.	Login to Dialogflow (https://dialogflow.com/)and click on Go to console.
+1.	Login to Dialogflow ( https://dialogflow.com/ ) and click on Go to console.
 2.	Click on Create new agent
 </br>![alt tag](https://github.com/vemuladheeraj/whatsappReplier/blob/master/ReadMeImages/2.png)
  
