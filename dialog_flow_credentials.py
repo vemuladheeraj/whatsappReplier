@@ -13,7 +13,7 @@ class DialogFlowAccessDetails:
         self.session_client = dialogflow.SessionsClient(credentials=self.credentials)
         # DIALOGFLOW_PROJECT_ID = 'dheeraj-chatbot'
         # DIALOGFLOW_LANGUAGE_CODE = 'en-US'
-        # GOOGLE_APPLICATION_CREDENTIALS = 'Dheeraj-ChatBot-2752b0e57277'
+        # GOOGLE_APPLICATION_CREDENTIALS = 'something'
         # SESSION_ID = 'current-user-id'
         self.DIALOGFLOW_LANGUAGE_CODE = 'en-US'
         self.DIALOGFLOW_PROJECT_ID = 'dheeraj-chatbot'
